@@ -9,3 +9,4 @@ app.listen(port, () => {
     console.log("Servidor a correr na porta " + port)
 })
 
+// tenho de ligar a base de dados ao site
