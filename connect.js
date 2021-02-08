@@ -12,7 +12,7 @@ module.exports = {
 
 }
 const connectL = require('./connect');
-connectL.con.query(SELECT * from list_ucs, function (err, rows, fields) {
+connectL.con.query('SELECT * from list_ucs', function (err, rows, fields) {
     if (!err) {
         numRows = rows.lenght;
     }
