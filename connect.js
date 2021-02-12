@@ -1,19 +1,13 @@
-const mysql = require ('mysql');
-const { SELECT } = require('sequelize/types/lib/query-types');
-module.exports = {
-    con: mysql.createConnection({
-        host: 'cps17.webserver.pt',
-        user: 'grupo1in_user',
-        password: 'Maz3fr2bLsVXSYna',
-        database: 'grupo1in_database'
-    })
+const Sequelize = require ('sequelize');
+const sequelize = new Sequelize('grupo1in_database', 'grupo1in_user', 'Maz3fr2bLsVXSYna', {
+    host: 'cps17.webserver.pt',
+    dialect: 'mysql'
+});
 
-    
-
-}
-const connectL = require('./connect');
-connectL.con.query('SELECT * from list_ucs', function (err, rows, fields) {
-    if (!err) {
-        numRows = rows.lenght;
+sequelize.authenticate().then(function(errors) { 
+    if (errors) {
+        console.error('Unable to connect to the database:', errors);
+    } else {
+        console.log('connected to mysql');
     }
-})
+ });
