@@ -38,4 +38,4 @@ const getTeachersByName = (req, res) => {
 
 exports.create = create; 
 exports.list = list;
-exports.getTeachersByName = getTeachersByName; 
+exports.getTeachersByName = getTeachersByName;

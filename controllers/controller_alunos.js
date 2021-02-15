@@ -9,7 +9,7 @@ const create = (req, res) => {
 
     alunoCreate.save(function (err, novoAluno) {
         if (err) {
-            res.status(400).send(err); 
+            res.status(400).create(err); 
         }
         res.status(200).json(novoAluno); 
     })
@@ -19,7 +19,7 @@ const create = (req, res) => {
 const list = (res) => {
     aluno.find(function (err, alunos) {
         if (err) {
-            res.status(400).send(err); 
+            res.status(400).create(err); 
         }
         res.status(200).json(alunos); 
     })
@@ -30,7 +30,7 @@ const getStudentsByName = (req, res) => {
         nome: req.params.nome},
         function (err, alunos) {
         if (err) {
-            res.status(400).send(err); 
+            res.status(400).create(err); 
         }
         res.status(200).json(alunos); 
     })

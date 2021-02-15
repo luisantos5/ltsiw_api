@@ -1,12 +1,12 @@
 const express = require('express');
 const {body, validationResult } = require('express-validator');
-const { Sequelize } = require('sequelize/types');
+const { Sequelize } = require('sequelize');
 const app = express();
 const port = process.env.PORT || 3000;
 const connect = require('./connect.js')
 const alunos = require('./routes/route_alunos')
-const professores= require('./routes/route_professores')
-const auth = require('./auth')
+//const professores= require('./routes/route_professores')
+//const auth = require('./auth')
 
 app.use(express.json());
 
@@ -22,11 +22,11 @@ const auth = function(req, res, next) {
 }
 
 app.use(express.json());
-app.use(auth); 
-app.use('/', users)
+//app.use(auth); 
+//app.use('/', users)
 app.use(alunos);
-app.use(professores);
-app.use(admin);
+//app.use(professores);
+//app.use(admin);
 
 app.get('/', (req, res) => {
     console.log("Request Arrived!")
@@ -45,7 +45,7 @@ app.get('/help', function (req,res) {
 });
 
 
-router.route('/')
+/* router.route('/')
     .get(function (req, res) {
 
         aluno.findById('5fa172f8194c7f3dc5870486').then(result => {
@@ -71,7 +71,7 @@ router.route('/')
     })
     .delete(function (req, res) {
         res.send('Delete Aluno');
-    })
+    }) */
 
     
 

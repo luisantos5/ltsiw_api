@@ -1,14 +1,15 @@
-const Sequelize = require ('sequelize');
+const { Sequelize, Model, DataTypes } = require('sequelize');
 const sequelize = new Sequelize('grupo1in_database', 'grupo1in_user', 'Maz3fr2bLsVXSYna', {
     host: 'cps17.webserver.pt',
     dialect: 'mysql'
 });
+class Aluno extends Model {}
 
-const alunoschema = new Sequelize({
-    nome: String,
-    email: String
+Aluno.init({
+  nome: DataTypes.STRING,
+  email: DataTypes.STRING
+}, { sequelize, modelName: 'aluno' });
+
+sequelize.sync().then().catch(error => {
+    console.log(error); 
 })
-
-const alunos = sequelize.alunoschema
-
-module.exports = router; 
