@@ -4,10 +4,27 @@ const { Sequelize } = require('sequelize/types');
 const app = express();
 const port = process.env.PORT || 3000;
 const connect = require('./connect.js')
+const alunos = require('./routes/route_alunos')
+const auth = require('./auth')
 
 app.use(express.json());
 
-//teste
+//auth
+const auth = function(req, res, next) {
+    utilities.validateToken(req.headers.authorization, (result) => {
+            if(result) {
+                next(); 
+            } else {
+                res.status(401).send("Invalid Token"); 
+            }
+        })
+}
+
+app.use(express.json());
+app.use(auth); 
+app.use('/', users)
+app.use('/alunos', alunos)
+
 app.get('/', (req, res) => {
     console.log("Request Arrived!")
     res.send('Hello World!')
@@ -18,22 +35,12 @@ app.listen(port, () => {
 })
 
 app.get('/', function (req,res) {
-    res.send('Já sei programar ');
+    res.send('Teste Aluno X ');
 });
 app.get('/help', function (req,res) {
-    res.send('não ha nada para ver ');
+    res.send('Página de ajuda ');
 });
 
-//teste
-/* 
-const alunoschema = new Sequelize({
-    nome: String,
-    idade: Number,
-    telemovel: Number,
-    email: String,
-    nif: Number,
-    localidade: String
-})
 
 router.route('/')
     .get(function (req, res) {
@@ -47,11 +54,7 @@ router.route('/')
     .post(function (req, res) {
         const newAluno = new aluno({
             nome: req.body.nome,
-            idade: req.body.idade,
-            telemovel: req.body.telemovel,
-            email: req.body.email,
-            nif: req.body.nif,
-            localidade: req.body.localidade
+            email: req.body.email
         })
         newAluno.save().then(result => {
             res.status(201).json(result)
@@ -59,10 +62,13 @@ router.route('/')
             res.status(400).json(error)
         })
     })
+    .put(function (req, res) {
+        res.send('Alterar Aluno');
+    })
     .delete(function (req, res) {
         res.send('Delete Aluno');
     })
 
-    module.exports = router; 
+    
 
- */
+ 
