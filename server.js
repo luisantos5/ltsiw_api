@@ -16,4 +16,11 @@ app.listen(port, () => {
     console.log("Servidor a correr na porta " + port)
 })
 
+app.get('/', function (req,res) {
+    res.send('Já sei programar ');
+});
+app.get('/help', function (req,res) {
+    res.send('não ha nada para ver ');
+});
+
 
