@@ -5,6 +5,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 const connect = require('./connect.js')
 const alunos = require('./routes/route_alunos')
+const professores= require('./routes/route_professores')
 const auth = require('./auth')
 
 app.use(express.json());
@@ -23,7 +24,8 @@ const auth = function(req, res, next) {
 app.use(express.json());
 app.use(auth); 
 app.use('/', users)
-app.use('/alunos', alunos)
+app.use(alunos)
+app.use(professores)
 
 app.get('/', (req, res) => {
     console.log("Request Arrived!")
