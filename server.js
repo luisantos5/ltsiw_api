@@ -24,8 +24,9 @@ const auth = function(req, res, next) {
 app.use(express.json());
 app.use(auth); 
 app.use('/', users)
-app.use(alunos)
-app.use(professores)
+app.use(alunos);
+app.use(professores);
+app.use(admin);
 
 app.get('/', (req, res) => {
     console.log("Request Arrived!")
@@ -66,6 +67,7 @@ router.route('/')
     })
     .put(function (req, res) {
         res.send('Alterar Aluno');
+        res.send('Alterar Admin');
     })
     .delete(function (req, res) {
         res.send('Delete Aluno');
