@@ -1,11 +1,11 @@
-const express = require('express');
+/* const express = require('express');
 const {body, validationResult } = require('express-validator');
 const { Sequelize } = require('sequelize');
 const app = express();
 const port = process.env.PORT || 3000;
-const connect = require('./connect.js')
+const connect = require('./models/connect.js')
 const alunos = require('./routes/route_alunos')
-//const professores= require('./routes/route_professores')
+const professores= require('./routes/route_professores')
 //const auth = require('./auth')
 
 app.use(express.json());
@@ -25,30 +25,45 @@ app.use(express.json());
 //app.use(auth); 
 //app.use('/', users)
 app.use(alunos);
-//app.use(professores);
+app.use(professores);
 //app.use(admin);
 
-app.get('/', (req, res) => {
+/* app.get('/', (req, res) => {
     console.log("Request Arrived!")
     res.send('Hello World!')
-})
+}) 
 
 app.listen(port, () => {
     console.log("Servidor a correr na porta " + port)
 })
 
-app.get('/', function (req,res) {
+/* app.get('/', function (req,res) {
     res.send('Teste Aluno X ');
-});
-app.get('/help', function (req,res) {
+    .get(function (req, res) {
+
+        aluno.findById('5fa172f8194c7f3dc5870486').then(result => {
+            res.status(200).json(result);
+        }).catch(error => {
+            res.status(400).json(error)
+        })
+    }) 
+}); 
+const db = require('./models/connect')
+db.sequelize.sync()
+
+app.get('/', function (req,res) {
     res.send('Página de ajuda ');
 });
 
 
-/* router.route('/')
+
+//alteração
+
+/* const router = require('./routes/route_alunos')
+ router.route('/alunos')
     .get(function (req, res) {
 
-        aluno.findById('5fa172f8194c7f3dc5870486').then(result => {
+        aluno.find().then(result => {
             res.status(200).json(result);
         }).catch(error => {
             res.status(400).json(error)
@@ -71,8 +86,43 @@ app.get('/help', function (req,res) {
     })
     .delete(function (req, res) {
         res.send('Delete Aluno');
-    }) */
-
-    
-
+    }) 
  
+
+  */
+ const express = require("express");
+ const bodyParser = require("body-parser");
+ //const cors = require("cors");
+ 
+ const app = express();
+ 
+ /* var corsOptions = {
+   origin: "http://localhost:8081/"
+ };
+ 
+ app.use(cors(corsOptions)); */
+ 
+ // parse requests of content-type - application/json
+ app.use(bodyParser.json());
+ 
+ // parse requests of content-type - application/x-www-form-urlencoded
+ app.use(bodyParser.urlencoded({ extended: true }));
+ 
+ // simple route
+ 
+  
+ const db = require('./models/connect');
+ db.sequelize.sync();
+
+ app.get("/", (req, res) => {
+   res.json({ message: "Welcome to bezkoder application." });
+ });
+ 
+ require("./routes/route_alunos")(app);
+
+
+ // set port, listen for requests
+ const PORT = process.env.PORT || 8080;
+ app.listen(PORT, () => {
+  
+ });

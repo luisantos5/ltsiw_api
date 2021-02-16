@@ -1,13 +1,13 @@
-var express = require('express')
+/* var express = require('express')
 var router = express.Router()
 var controller = require('../controllers/controller_alunos')
 const { validationResult, body, param } = require('express-validator')
 
 router.get('/',  function (req, res) {
     controller.list(res); 
-})
+}) */
 
-router.get('/:nome', [
+/* router.get('/:nome', [
     param('nome').notEmpty().escape(), 
 ],  function (req, res) {
     const errors = validationResult(req); 
@@ -16,9 +16,9 @@ router.get('/:nome', [
     } else {
         res.status(404).json({errors: errors.array()})
     }
-})
+}) */
 
-router.post('/', [
+/* router.post('/', [
     body('nome').notEmpty().escape(), 
     body('email').notEmpty().isEmail(),
 ],  function (req, res) {
@@ -31,4 +31,17 @@ router.post('/', [
 })
 
 
-module.exports = router
+module.exports = router */
+
+module.exports = app => {
+    const alunosController = require('../controllers/controller_alunos')
+    var router = require('express').Router()
+
+
+    router.post('/', alunosController.create)
+
+    router.get('/', alunosController.findAll)
+    app.use('/alunos', router);
+
+}
+

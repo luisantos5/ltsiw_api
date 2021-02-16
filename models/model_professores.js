@@ -3,12 +3,23 @@ const sequelize = new Sequelize('grupo1in_database', 'grupo1in_user', 'Maz3fr2bL
     host: 'cps17.webserver.pt',
     dialect: 'mysql'
 });
+class Professor extends Model {}
 
-const professoreschema = new Sequelize({
+Professor.init({
+  nome: DataTypes.STRING,
+  email: DataTypes.STRING
+}, { sequelize, modelName: 'professor' });
+
+sequelize.sync().then().catch(error => {
+    console.log(error); 
+})
+
+
+/* const professoreschema = new Sequelize({
     nome: String,
     email: String
 })
 
 const professores = sequelize.professoreschema
 
-module.exports = router;
+module.exports = router; */
